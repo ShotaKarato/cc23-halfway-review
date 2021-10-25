@@ -1,28 +1,19 @@
 const express = require("express");
 const knex = require("./knex");
+const path = require("path");
 
 const app = express();
 const port = process.env.PORT || 4000;
 
-app.use(express.json());
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "client/build")));
+}
 
-// const dummyData = [
-//   {
-//     id: 1,
-//     title: "Today's",
-//     content: "This is just a dummy data",
-//   },
-//   {
-//     id: 2,
-//     title: "Tomorrow's",
-//     content: "This is just a dummy data",
-//   },
-// ];
+app.use(express.json());
 
 app.get("/notes", async (req, res) => {
   let data = await knex().select().table("notes");
-  console.log(data);
-  res.send(200);
+  res.send(data);
 });
 
 app.listen(port, () => {

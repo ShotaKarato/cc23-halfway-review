@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node -r dotenv/config server.js",
-    "dev": "nodemon server.js"
+    "serverStart": "node -r dotenv/config server.js",
+    "serverDev": "nodemon -r dotenv/config server.js",
+    "start": "node server.js",
+    "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "keywords": [],
   "author": "",
