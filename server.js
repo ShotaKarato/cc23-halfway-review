@@ -13,6 +13,7 @@ app.use(express.json());
 
 app.get("/notes", async (req, res) => {
   let data = await knex().select().table("notes");
+  console.log(data);
   res.send(data);
 });
 
