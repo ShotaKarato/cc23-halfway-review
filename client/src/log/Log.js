@@ -13,6 +13,15 @@ const Log = () => {
     setNotes(data);
   };
 
+  // function for deleting note
+  const deleteNote = async (id) => {
+    let response = await fetch(`http://localhost:4000/notes/${id}`, {
+      method: "DELETE",
+      mode: "cors",
+    });
+    fetchNotes();
+  };
+
   // fetch notes when the page is loaded
   useEffect(() => {
     fetchNotes();
@@ -20,11 +29,14 @@ const Log = () => {
 
   return (
     <ul className="notes">
-      {notes.map(({ title, content }) => {
+      {notes.map(({ id, title, content }, index) => {
         return (
-          <li className="notes__note">
+          <li className="notes__note" data-id={id} key={index}>
             <h2 className="notes__note-title">{title}</h2>
             <p className="notes__note-content">{content}</p>
+            <button className="btn--delete" onClick={() => deleteNote(id)}>
+              Delete
+            </button>
           </li>
         );
       })}
