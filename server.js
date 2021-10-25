@@ -1,5 +1,5 @@
 const express = require("express");
-const knex = require("./knex");
+const knex = require("./knex/knex");
 const path = require("path");
 const cors = require("cors");
 
