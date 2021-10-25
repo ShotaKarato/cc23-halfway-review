@@ -5,8 +5,21 @@ const port = process.env.PORT || 4000;
 
 app.use(express.json());
 
+const dummyData = [
+  {
+    id: 1,
+    title: "Today's",
+    content: "This is just a dummy data",
+  },
+  {
+    id: 2,
+    title: "Tomorrow's",
+    content: "This is just a dummy data",
+  },
+];
+
 app.get("/notes", (req, res) => {
-  res.sendStatus(200);
+  res.send(dummyData);
 });
 
 app.listen(port, () => {
